@@ -6,6 +6,7 @@ import twitter4j.Status;
 import twitter4j.Twitter;
 import twitter4j.TwitterException;
 import twitter4j.TwitterFactory;
+import twitter4j.conf.ConfigurationBuilder;
 
 /**
  * Clase para recobrar los twitts del morrazo
@@ -21,10 +22,19 @@ public class StatusTwitter {
      
         Twitter mitwitter = new TwitterFactory().getInstance();
  
-        Query query = new Query("#Cangas");
+              Query query = new Query("#Metallica");
         QueryResult result = mitwitter.search(query);
         for (Status status : result.getTweets()) {
             System.out.println("@" + status.getUser().getScreenName() + ":" + status.getText());
         }
+        ConfigurationBuilder cb = new ConfigurationBuilder();
+        cb.setDebugEnabled(true)
+                .setOAuthConsumerKey("*********************")
+                .setOAuthConsumerSecret("******************************************")
+                .setOAuthAccessToken("**************************************************")
+                .setOAuthAccessTokenSecret("******************************************");
+        TwitterFactory tf = new TwitterFactory(cb.build());
+        Twitter twitter = tf.getInstance();
+    
     }
 }
